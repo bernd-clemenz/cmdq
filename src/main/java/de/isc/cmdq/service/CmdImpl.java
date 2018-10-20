@@ -15,6 +15,9 @@ import javax.annotation.PostConstruct;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
+/**
+ * Command service.
+ */
 @Component
 @Scope(BeanDefinition.SCOPE_SINGLETON)
 @SuppressWarnings("unused")
