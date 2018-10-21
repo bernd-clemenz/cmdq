@@ -2,7 +2,6 @@ package de.isc.cmdq.service;
 
 import de.isc.cmdq.domain.CmdQueueItem;
 import de.isc.cmdq.domain.CmdRequest;
-import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +61,11 @@ public class CmdImpl implements Cmd {
     m_queue.add(item);
 
     return item.getId().toString();
+  }
+  //---------------------------------------------------------------------------
+  @Override
+  public int size() {
+    LOG.debug("size of queue requested");
+    return m_queue.size();
   }
 }

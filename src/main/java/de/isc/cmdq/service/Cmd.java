@@ -13,4 +13,10 @@ public interface Cmd {
    * @return the ID of the inserted command request (for further reference)
    */
   String add(CmdRequest req);
+
+  /**
+   *
+   * @return number of items currently in queue
+   */
+  int size();
 }

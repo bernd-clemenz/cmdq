@@ -7,12 +7,13 @@
     <groupId>de.isc</groupId>
     <artifactId>cmdq</artifactId>
     <version>1.0.0</version>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>2.9.7</jackson.version>
         <junit.version>5.3.1</junit.version>
-        <log4j.version>2.6.1</log4j.version>
+        <log4j.version>2.11.1</log4j.version>
         <spring.version>5.1.1.RELEASE</spring.version>
     </properties>
 
@@ -22,6 +23,14 @@
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -203,6 +212,12 @@
               <configuration>
                 <encoding>UTF-8</encoding>
               </configuration>
+            </plugin>
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
             </plugin>
         </plugins>
         <resources>
