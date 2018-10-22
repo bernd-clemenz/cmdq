@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,7 +35,7 @@ public class ErrorHandler {
    * @return Wrapper for the generic error container.
    */
   @ExceptionHandler(InternalError.class)
-  @RequestBody
+  @ResponseBody
   public ResponseEntity<ErrorDescriptor> errorHandler(final Exception x,
                                                       final HttpServletRequest req) {
     HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
