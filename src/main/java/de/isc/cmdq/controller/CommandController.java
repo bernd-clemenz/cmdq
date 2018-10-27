@@ -29,7 +29,7 @@ public class CommandController {
   }
 
   /**
-   * Inittialized the controller.
+   * Initialized the controller.
    *
    * @return this
    */
