@@ -40,8 +40,8 @@ public class WebConfig implements WebMvcConfigurer {
               .useRegisteredExtensionsOnly(true);
   }
 
-  @Override
-  public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
-    configurer.enable();
-  }
+ // @Override
+ // public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
+ //   configurer.enable();
+ // }
 }

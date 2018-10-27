@@ -25,8 +25,7 @@ public class CmdQueueItemTest {
   @Test
   public void testStaticConstructor() {
     final String name = "thisIsaName";
-    CmdRequest request = new CmdRequest();
-    request.setCmdName(name);
+    CmdRequest request = CmdRequest.builder().cmdName(name).build();
     CmdQueueItem item = CmdQueueItem.from(request);
 
     Assertions.assertNotNull(item);
@@ -43,8 +42,9 @@ public class CmdQueueItemTest {
 
   @Test
   public void testStaticConstructorRequestNameNull() {
+    CmdRequest request = CmdRequest.builder().cmdName(null).build();
     Assertions.assertThrows(NullPointerException.class,() -> {
-      CmdQueueItem.from(new CmdRequest());
+      CmdQueueItem.from(request);
     });
   }
 }

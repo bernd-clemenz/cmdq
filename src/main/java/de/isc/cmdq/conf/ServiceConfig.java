@@ -7,7 +7,7 @@ import org.springframework.context.annotation.*;
  * (c) ISC Clemenz &amp; Weinbrecht GmbH
  */
 @Configuration
-//@EnableLoadTimeWeaving
+@EnableLoadTimeWeaving
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @ComponentScan(
         basePackages = {

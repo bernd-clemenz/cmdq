@@ -1,5 +1,6 @@
 package de.isc.cmdq.controller;
 
+import de.isc.cmdq.error.InternalResourceNotFound;
 import de.isc.cmdq.service.InternalDataService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,6 +23,7 @@ import java.util.Properties;
  */
 @RestController
 @RequestMapping("/internal")
+@SuppressWarnings("unused")
 public class InternalController {
   private static final Logger LOG = LogManager.getLogger(InternalController.class);
 
@@ -38,17 +40,29 @@ public class InternalController {
   }
   //---------------------------------------------------------------------------
   /**
+   * @return this
+   */
+  InternalController init() {
+    LOG.info("Internal controller starting.");
+    return this;
+  }
+  //---------------------------------------------------------------------------
+  /**
    * @return build data
+   * @throws InternalError i case of a read issue
+   * @throws InternalResourceNotFound in case of NPE
    */
   @GetMapping("/version")
   @ResponseBody
   public Map<?,?> version() {
-    LOG.trace("version requested");
+    LOG.debug("version requested");
     Properties version = new Properties();
-    try(InputStream ins = InternalController.class.getResourceAsStream("/version")) {
+    try(InputStream ins = InternalController.class.getResourceAsStream("/version.properties")) {
       version.load(ins);
     } catch(IOException x) {
       throw new InternalError(x);
+    } catch(NullPointerException x) {
+      throw new InternalResourceNotFound(x);
     }
 
     return version;
@@ -60,9 +74,11 @@ public class InternalController {
   @GetMapping("/status")
   @ResponseBody
   public Map<?,?> statusData() {
+    LOG.debug("status requested");
     // Double-Bracket initialization
     return Collections.unmodifiableMap(new HashMap<String, Object>() {{
       put("memory",m_service.memory());
+      put("start.time",m_service.startTime());
     }});
   }
 }

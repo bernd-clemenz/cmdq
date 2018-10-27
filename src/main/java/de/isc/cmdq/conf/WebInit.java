@@ -9,7 +9,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 /**
- * Initialize the web-application
+ * Initialize the web-application.
  */
 public class WebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
   private static final Logger LOG = LogManager.getLogger(WebInit.class);
@@ -20,23 +20,23 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
   public WebInit() { /* empty*/ }
 
   @Override
-  public void onStartup(ServletContext servletContext)
+  public void onStartup(final ServletContext servletContext)
   throws ServletException {
     LOG.info("Web-application init");
   }
 
   @Override
   protected String[] getServletMappings() {
-    return new String[] { "/v1" };
+    return new String[] { "/v1/*" };
   }
 
   @Override
   protected Class<?>[] getServletConfigClasses() {
-    return new Class[] { WebConfig.class };
+    return new Class[] { };
   }
 
   @Override
   protected Class<?>[] getRootConfigClasses() {
-    return new Class[] { ServiceConfig.class };
+    return new Class[] { ServiceConfig.class, WebConfig.class };
   }
 }

@@ -2,7 +2,12 @@ package de.isc.cmdq.service;
 
 import de.isc.cmdq.conf.ServiceConfig;
 import de.isc.cmdq.domain.CmdRequest;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +22,17 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @DirtiesContext
 public class CmdImplTest {
 
+  private static Logger LOG;
+
+  /*
+   * Select a specific logging configuration for testing.
+   */
+  @BeforeAll
+  public static void beforeClass() {
+    System.setProperty("log4j.configurationFile","log4j2-test.xml");
+    LOG = LogManager.getLogger(CmdImplTest.class);
+  }
+
   @Autowired private Cmd m_cmd;
   @Value("${cmdq.queue.size}") private int m_maxSize;
 
@@ -29,6 +45,7 @@ public class CmdImplTest {
 
   @Test
   public void test002AddNull() {
+    LOG.info("Add null to command queue");
     Assertions.assertThrows(NullPointerException.class,() -> {
       m_cmd.add(null);
     });
@@ -36,25 +53,38 @@ public class CmdImplTest {
 
   @Test
   public void test003Add() {
-    CmdRequest req = new CmdRequest();
-    req.setCmdName("name");
+    LOG.info("Add real objects to command queue");
+    CmdRequest req = CmdRequest.builder().cmdName("name").build();
     String id = m_cmd.add(req);
     Assertions.assertNotNull(id);
   }
 
   @Test
   public void test004Size() {
+    LOG.info("Check size while processing");
     int sz = m_cmd.size();
     Assertions.assertTrue(sz == 0);
-    CmdRequest req = new CmdRequest();
-    req.setCmdName("name");
+    CmdRequest req = CmdRequest.builder().cmdName("name").build();
     String id = m_cmd.add(req);
     sz = m_cmd.size();
-    Assertions.assertTrue(sz == 1);
+    Assertions.assertNotNull(id);
+    Assertions.assertTrue(sz >= 0);
   }
 
   @Test
   public void test005InitialSizeConfig() {
     Assertions.assertTrue(m_maxSize > 0);
+  }
+
+  @Test
+  public void test006StuffQueue() {
+    LOG.info("push a lot stuff into the command queue");
+    for(int i = 0; i < m_maxSize * 5; ++i) {
+      CmdRequest req = CmdRequest.builder()
+                                 .cmdName(RandomStringUtils.randomAlphanumeric(10))
+                                 .build();
+      m_cmd.add(req);
+    }
+    LOG.info("stuffing done");
   }
 }

@@ -5,6 +5,9 @@ import org.apache.commons.lang3.Validate;
 
 import java.util.UUID;
 
+/**
+ * Item that is placed in the command queue.
+ */
 @Data
 public class CmdQueueItem  {
   /**

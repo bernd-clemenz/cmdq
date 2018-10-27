@@ -9,7 +9,18 @@
     <version>1.0.0</version>
     <packaging>war</packaging>
 
+    <description>
+        A sample Spring-MVC application under Java 11.
+        Just to see the compatibility of the modules.
+    </description>
+
+    <scm>
+        <url>https://github.com/bernd-clemenz/cmdq</url>
+        <connection>scm:git:https://github.com/bernd-clemenz/cmdq.git</connection>
+    </scm>
+
     <properties>
+        <aspectj.version>1.9.1</aspectj.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>2.9.7</jackson.version>
         <junit.version>5.3.1</junit.version>
@@ -48,7 +59,13 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-            <version>1.9.1</version>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
         </dependency>
 
         <dependency>
@@ -187,7 +204,7 @@
                         <includeTags>junit5</includeTags>
                     </properties>
                     <argLine>
-                        --illegal-access=permit
+                        --illegal-access=permit -javaagent:${settings.localRepository}/org/springframework/spring-instrument/${spring.version}/spring-instrument-${spring.version}.jar
                     </argLine>
                     <!--
                     <argLine>-javaagent:${settings.localRepository}/org.springframework/spring-instrument/${spring.version}/spring-instrument-${spring.version}.jar</argLine>
