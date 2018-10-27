@@ -56,9 +56,19 @@ public class InternalControllerTest {
   @DisplayName("Check version controller")
   public void test001Version()
   throws Exception {
-    LOG.info("web");
+    LOG.info("version");
     mockMvc.perform(get("/internal/version"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+           .andExpect(status().isOk())
+           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+  }
+
+  @Test
+  @DisplayName("Check status endpoint")
+  public void test002Status()
+  throws Exception {
+    LOG.info("status");
+    mockMvc.perform(get("/internal/status"))
+           .andExpect(status().isOk())
+           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
   }
 }

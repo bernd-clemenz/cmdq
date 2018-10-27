@@ -1,6 +1,5 @@
 package de.isc.cmdq.controller;
 
-import de.isc.cmdq.domain.CmdQueueItem;
 import de.isc.cmdq.domain.CmdRequest;
 import de.isc.cmdq.service.Cmd;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +12,7 @@ import javax.annotation.PostConstruct;
 
 @RestController
 @RequestMapping("/cmd")
+@SuppressWarnings("unused")
 public class CommandController {
   private final Logger LOG = LogManager.getLogger(CommandController.class);
 
@@ -28,12 +28,22 @@ public class CommandController {
     m_cmdSrv = cmdSrv;
   }
 
+  /**
+   * Inittialized the controller.
+   *
+   * @return this
+   */
   @PostConstruct
   CommandController init() {
     LOG.info("started command controller");
     return this;
   }
 
+  /**
+   *
+   * @param cmdName add a command request
+   * @return the id of the request
+   */
   @PutMapping("/{cmd}")
   @ResponseBody
   @ResponseStatus(HttpStatus.CREATED)

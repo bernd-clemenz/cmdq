@@ -2,6 +2,7 @@ package de.isc.cmdq.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -21,10 +22,17 @@ public class InternalDataService {
   private static final Logger LOG = LogManager.getLogger(InternalDataService.class);
 
   private final Instant m_startTime = Instant.now();
+  private final StatisticsCollector m_statColl;
+
   /**
    * Constructor.
+   *
+   * @param statColl the internal statistics collector.
    */
-  public InternalDataService() { /* empty */ }
+  @Autowired
+  public InternalDataService(final StatisticsCollector statColl) {
+    m_statColl = statColl;
+  }
 
   @PostConstruct
   InternalDataService init() {
@@ -41,4 +49,9 @@ public class InternalDataService {
    * @return start time of the service
    */
   public Instant startTime() { return m_startTime; }
+
+  /**
+   * @return number of calls to add queue
+   */
+  public long countAddQueueCall() { return m_statColl.countQueueAdd(); }
 }

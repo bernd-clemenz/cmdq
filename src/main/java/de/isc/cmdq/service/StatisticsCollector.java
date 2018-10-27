@@ -34,4 +34,5 @@ public class StatisticsCollector {
     return jp.proceed();
   }
 
+  public long countQueueAdd() { return m_addQueueCalls.get(); }
 }

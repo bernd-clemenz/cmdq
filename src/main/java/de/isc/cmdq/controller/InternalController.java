@@ -79,6 +79,7 @@ public class InternalController {
     return Collections.unmodifiableMap(new HashMap<String, Object>() {{
       put("memory",m_service.memory());
       put("start.time",m_service.startTime());
+      put("add.queue.calls",m_service.countAddQueueCall());
     }});
   }
 }
