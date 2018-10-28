@@ -8,12 +8,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -29,15 +31,20 @@ public class CmdImpl implements Cmd {
 
   private ArrayBlockingQueue<CmdQueueItem> m_queue;
   private final Environment m_env;
+  private final ApplicationContext m_app;
   private Thread m_worker;
   //---------------------------------------------------------------------------
   /**
    * Constructor.
+   *
    * @param env the Spring-environment
+   * @param app the Spring-Context
    */
   @Autowired
-  public CmdImpl(final Environment env) {
+  public CmdImpl(final Environment env,
+                 final ApplicationContext app) {
     m_env = env;
+    m_app = app;
   }
   //---------------------------------------------------------------------------
   /**
@@ -61,7 +68,8 @@ public class CmdImpl implements Cmd {
             CmdQueueItem cmd = m_queue.take();
             LOG.debug("Now processing: {}",cmd.getId());
             // simulate some work...
-            Thread.sleep(RandomUtils.nextInt(10,30));
+            m_app.getBean(JythonService.class,"hello_param.py")
+                 .execute(Map.of("user","T1000"));
           }
         } catch (InterruptedException x) {
           LOG.warn("Command queue processing interrupted");
