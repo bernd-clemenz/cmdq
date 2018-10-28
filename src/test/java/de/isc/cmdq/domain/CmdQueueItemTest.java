@@ -21,9 +21,9 @@ class CmdQueueItemTest {
 
   @Test
   void testStaticConstructorNull() {
-     Assertions.assertThrows(NullPointerException.class,() -> {
-      CmdQueueItem.from(null);
-    });
+    Assertions.assertThrows(NullPointerException.class,() ->
+      CmdQueueItem.from(null)
+    );
   }
 
 }

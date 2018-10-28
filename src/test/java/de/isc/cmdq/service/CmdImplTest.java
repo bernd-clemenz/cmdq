@@ -47,9 +47,9 @@ class CmdImplTest {
   @Test
   void test002AddNull() {
     LOG.info("Add null to command queue");
-    Assertions.assertThrows(NullPointerException.class,() -> {
-      m_cmd.add(null);
-    });
+    Assertions.assertThrows(NullPointerException.class,() ->
+      m_cmd.add(null)
+    );
   }
 
   @Test

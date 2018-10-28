@@ -21,10 +21,17 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
    */
   public WebInit() { /* empty*/ }
 
+  /**
+   * Do init.
+   *
+   * @param servletContext the current servlet context
+   * @throws ServletException forwarded from super-call
+   */
   @Override
   public void onStartup(final ServletContext servletContext)
   throws ServletException {
     LOG.info("Web-application init");
+    super.onStartup(servletContext);
   }
 
   @Override

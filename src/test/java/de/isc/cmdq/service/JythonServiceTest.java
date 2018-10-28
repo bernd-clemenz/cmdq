@@ -51,43 +51,43 @@ class JythonServiceTest {
   @DisplayName("Null script name")
   void test002ConstructorNullScriptName() {
     LOG.info("Null script name");
-    Assertions.assertThrows(BeanCreationException.class,() -> {
-      m_app.getBean(JythonService.class,new Object[] {null});
-    });
+    Assertions.assertThrows(BeanCreationException.class,() ->
+      m_app.getBean(JythonService.class,new Object[] {null, null})
+    );
   }
 
   @Test
   @DisplayName("Empty script name")
   void test003ConstructorEmptyScriptName() {
     LOG.info("empty script name");
-    Assertions.assertThrows(BeanCreationException.class,() -> {
-      m_app.getBean(JythonService.class,"");
-    });
+    Assertions.assertThrows(BeanCreationException.class,() ->
+      m_app.getBean(JythonService.class,"", null)
+    );
   }
 
   @Test
   @DisplayName("Empty script")
   void test004ConstructorEmptyScript() {
     LOG.info("empty script (no code)");
-    Assertions.assertThrows(BeanCreationException.class,() -> {
-      m_app.getBean(JythonService.class,"empty.py");
-    });
+    Assertions.assertThrows(BeanCreationException.class,() ->
+      m_app.getBean(JythonService.class,"empty.py", null)
+    );
   }
 
   @Test
   @DisplayName("Not existend script")
   void test004ConstructorNotExistent() {
     LOG.info("Not existent script");
-    Assertions.assertThrows(BeanCreationException.class,() -> {
-      m_app.getBean(JythonService.class,"not_existent_script.py");
-    });
+    Assertions.assertThrows(BeanCreationException.class,() ->
+      m_app.getBean(JythonService.class,"not_existent_script.py", null)
+    );
   }
 
   @Test
   @DisplayName("Hello-script")
   void test005HelloScript() {
     LOG.info("Hello world");
-    m_app.getBean(JythonService.class,"hello.py")
+    m_app.getBean(JythonService.class,"hello.py", null)
          .execute(null);
   }
 
@@ -95,7 +95,7 @@ class JythonServiceTest {
   @DisplayName("Hello-script with parameters")
   void test006HelloScript() {
     LOG.info("Hello with parameter");
-    m_app.getBean(JythonService.class,"hello_param.py")
+    m_app.getBean(JythonService.class,"hello_param.py", null)
          .execute(Map.of("user","Homer Simpson"));
   }
 
@@ -104,7 +104,7 @@ class JythonServiceTest {
   void test007HelloScriptMultipleTimes() {
     LOG.info("Hello with parameter");
     for(int i = 0; i < 50; ++i) {
-      m_app.getBean(JythonService.class, "hello_param.py")
+      m_app.getBean(JythonService.class, "hello_param.py", null)
            .execute(Map.of("user", "Homer Simpson"));
     }
 
@@ -113,13 +113,12 @@ class JythonServiceTest {
   }
 
   @Test
-  @DisplayName("Script with execption")
+  @DisplayName("Script with exception")
   void test007ScriptWithException() {
-    LOG.info("Script with execption");
-    Assertions.assertThrows(ScriptError.class,() -> {
-      m_app.getBean(JythonService.class,"error.py")
-           .execute(Map.of("user","Homer Simpson"));
-    });
-    ;
+    LOG.info("Script with exception");
+    Assertions.assertThrows(ScriptError.class,() ->
+      m_app.getBean(JythonService.class,"error.py", null)
+           .execute(Map.of("user","Homer Simpson"))
+    );
   }
 }

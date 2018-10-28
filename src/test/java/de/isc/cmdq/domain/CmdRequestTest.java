@@ -23,8 +23,8 @@ class CmdRequestTest {
 
   @Test
   void testStaticConstructorRequestNameNull() {
-    Assertions.assertThrows(NullPointerException.class,() -> {
-      CmdRequest.builder().cmdName(null).build();
-    });
+    Assertions.assertThrows(NullPointerException.class,() ->
+      CmdRequest.builder().cmdName(null).build()
+    );
   }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="info" name="cmdq" packages="de.isc.cmdq">
     <Appenders>
-        <RollingFile name="RollingFile" fileName="logs/cmdq.log"
-                     filePattern="logs/$${date:yyyy-MM}/cmdq-%d{yyyy-MM-dd}-%i.log.gz">
+        <RollingFile name="RollingFile" fileName="../logs/cmdq.log"
+                     filePattern="../logs/$${date:yyyy-MM}/cmdq-%d{yyyy-MM-dd}-%i.log.gz">
             <PatternLayout>
                 <Pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Pattern>
             </PatternLayout>
@@ -13,14 +13,18 @@
             <DefaultRolloverStrategy max="20"/>
         </RollingFile>
         <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout   pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
         </Console>
     </Appenders>
 
     <Loggers>
+        <Root level="error" additivity="false">
+            <appender-ref ref="console" level="error" />
+            <appender-ref ref="RollingFile" level="error" />
+        </Root>
         <Logger name="de.isc.cmdq" level="debug" additivity="true">
             <appender-ref ref="RollingFile" level="debug" />
-            <appender-ref ref="Console" level="debug" />
+            <appender-ref ref="console" level="debug" />
         </Logger>
 
     </Loggers>

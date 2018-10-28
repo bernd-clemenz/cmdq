@@ -3,10 +3,10 @@
 # (c) ISC Clemenz & Weinbrecht GmbH
 #
 
-from java.lang import IllegalStateException
+from de.isc.cmdq.error import ScriptError
 
 log.info("Hello world from Jython")
 
 # this always thrown ...
 if some_thing is None:
-    raise IllegalStateException("error in script")
+    raise ScriptError("error in script")

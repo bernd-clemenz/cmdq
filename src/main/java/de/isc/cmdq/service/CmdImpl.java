@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -30,6 +33,7 @@ public class CmdImpl implements Cmd {
   private static final Logger LOG = LogManager.getLogger(CmdImpl.class);
 
   private ArrayBlockingQueue<CmdQueueItem> m_queue;
+  private long m_waitBeforeKill;
   private final Environment m_env;
   private final ApplicationContext m_app;
   private Thread m_worker;
@@ -57,6 +61,7 @@ public class CmdImpl implements Cmd {
     LOG.info("Initializing command queue");
     try {
       m_queue = new ArrayBlockingQueue<>(Integer.valueOf(m_env.getProperty("cmdq.queue.size", "200")));
+      m_waitBeforeKill = Long.valueOf(m_env.getProperty("cmdq.wait.before.kill", "1000"));
 
       /*
        * This runnable executes the commands, here it's just
@@ -70,7 +75,7 @@ public class CmdImpl implements Cmd {
             LOG.debug("Now processing: {}",cmd.getId());
             // simulate some work...
             try {
-              m_app.getBean(JythonService.class, "hello_param.py")
+              m_app.getBean(JythonService.class, "hello_param.py", cmd)
                    .execute(Map.of("user", "T1000"));
             } catch(ScriptError x) {
               LOG.error("Script error: {}",x.getMessage());
@@ -89,7 +94,7 @@ public class CmdImpl implements Cmd {
 
       return this;
     } catch(NumberFormatException | NullPointerException x) {
-      throw new ConfigError("cmdq.queue.size");
+      throw new ConfigError("cmdq.queue.size or cmdq.wait.before.kill");
     }
   }
   //---------------------------------------------------------------------------
@@ -100,7 +105,14 @@ public class CmdImpl implements Cmd {
   void done() {
     LOG.info("Stopping command queue");
     try {
-      if(null != m_worker) {
+      if(null != m_worker && m_worker.isAlive()) {
+        if(!m_queue.isEmpty()) {
+          LOG.info("Waiting for some time to complete work.");
+          // in case there is some work left, we wait for 5s
+          // to give it a chance to complete
+          Thread.sleep(m_waitBeforeKill);
+        }
+
         m_worker.interrupt();
       }
 
@@ -139,12 +151,20 @@ public class CmdImpl implements Cmd {
   }
   //---------------------------------------------------------------------------
   /**
-   *
    * @return the current number of items in queue.
    */
   @Override
   public int size() {
     LOG.debug("size of queue requested");
     return m_queue.size();
+  }
+  //---------------------------------------------------------------------------
+  /**
+   * @return all pending requests
+   */
+  @Override
+  public List<CmdQueueItem> unfinishedCommands() {
+    LOG.debug("pending items requested");
+    return Collections.unmodifiableList(Arrays.asList(m_queue.toArray(new CmdQueueItem[0])));
   }
 }

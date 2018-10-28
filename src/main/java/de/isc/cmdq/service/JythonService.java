@@ -1,5 +1,6 @@
 package de.isc.cmdq.service;
 
+import de.isc.cmdq.domain.CmdQueueItem;
 import de.isc.cmdq.error.InternalResourceNotFound;
 import de.isc.cmdq.error.ScriptError;
 import org.apache.commons.io.IOUtils;
@@ -34,6 +35,7 @@ public class JythonService {
   }
 
   private final String m_scriptName;
+  private final CmdQueueItem m_request;
   private final PythonInterpreter m_python = new PythonInterpreter();
   private String m_script;
 
@@ -41,9 +43,12 @@ public class JythonService {
    * Constructor.
    *
    * @param scriptName the name of the script to execute
+   * @param request the request for that script execution.
    */
-  public JythonService(final String scriptName) {
+  public JythonService(final String scriptName,
+                       final CmdQueueItem request) {
     m_scriptName = scriptName;
+    m_request = request;
   }
 
   /**
@@ -90,9 +95,10 @@ public class JythonService {
    * @return currently empty
    * @throws ScriptError if the script reports an error
    */
-  public Optional<Object> execute(final Map<String,Object> param) {
+  Optional<Object> execute(final Map<String,Object> param) {
     LOG.debug("Executing: {}",m_scriptName);
     m_python.set("log",LOG);
+    m_python.set("request",m_request);
     if(null != param) {
       for(Map.Entry<String,Object> entry : param.entrySet()) {
         m_python.set(entry.getKey(),entry.getValue());

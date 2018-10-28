@@ -1,6 +1,9 @@
 package de.isc.cmdq.service;
 
+import de.isc.cmdq.domain.CmdQueueItem;
 import de.isc.cmdq.domain.CmdRequest;
+
+import java.util.List;
 
 /**
  * Operations of the command queue.
@@ -19,4 +22,9 @@ public interface Cmd {
    * @return number of items currently in queue
    */
   int size();
+
+  /**
+   * @return all pending commands
+   */
+  List<CmdQueueItem> unfinishedCommands();
 }
