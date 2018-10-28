@@ -3,7 +3,7 @@ package de.isc.cmdq.service;
 import de.isc.cmdq.domain.CmdQueueItem;
 import de.isc.cmdq.domain.CmdRequest;
 import de.isc.cmdq.error.ConfigError;
-import org.apache.commons.lang3.RandomUtils;
+import de.isc.cmdq.error.ScriptError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,14 +64,19 @@ public class CmdImpl implements Cmd {
        */
       Runnable workHorse = () -> {
         try {
+          // go until interruption ...
           while(true) {
             CmdQueueItem cmd = m_queue.take();
             LOG.debug("Now processing: {}",cmd.getId());
             // simulate some work...
-            m_app.getBean(JythonService.class,"hello_param.py")
-                 .execute(Map.of("user","T1000"));
+            try {
+              m_app.getBean(JythonService.class, "hello_param.py")
+                   .execute(Map.of("user", "T1000"));
+            } catch(ScriptError x) {
+              LOG.error("Script error: {}",x.getMessage());
+            }
           }
-        } catch (InterruptedException x) {
+        } catch(InterruptedException x) {
           LOG.warn("Command queue processing interrupted");
         }
       };
@@ -81,7 +86,6 @@ public class CmdImpl implements Cmd {
       m_worker.setName("Command-Queue-Worker");
       m_worker.start();
       LOG.info("Started command worker");
-
 
       return this;
     } catch(NumberFormatException | NullPointerException x) {
