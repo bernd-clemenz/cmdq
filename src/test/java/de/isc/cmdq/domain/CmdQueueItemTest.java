@@ -3,27 +3,11 @@ package de.isc.cmdq.domain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
-
-public class CmdQueueItemTest {
-  public CmdQueueItemTest() { /* empty */ }
+class CmdQueueItemTest {
+  CmdQueueItemTest() { /* empty */ }
 
   @Test
-  public void testConstructor() {
-    Assertions.assertNotNull(new CmdQueueItem());
-  }
-
-  @Test
-  public void test001UUID() {
-    CmdQueueItem item = new CmdQueueItem();
-    UUID id = UUID.randomUUID();
-
-    item.setId(id);
-    Assertions.assertEquals(id,item.getId());
-  }
-
-  @Test
-  public void testStaticConstructor() {
+  void testStaticConstructor() {
     final String name = "thisIsaName";
     CmdRequest request = CmdRequest.builder().cmdName(name).build();
     CmdQueueItem item = CmdQueueItem.from(request);
@@ -34,17 +18,10 @@ public class CmdQueueItemTest {
   }
 
   @Test
-  public void testStaticConstructorNull() {
+  void testStaticConstructorNull() {
      Assertions.assertThrows(NullPointerException.class,() -> {
       CmdQueueItem.from(null);
     });
   }
 
-  @Test
-  public void testStaticConstructorRequestNameNull() {
-    CmdRequest request = CmdRequest.builder().cmdName(null).build();
-    Assertions.assertThrows(NullPointerException.class,() -> {
-      CmdQueueItem.from(request);
-    });
-  }
 }

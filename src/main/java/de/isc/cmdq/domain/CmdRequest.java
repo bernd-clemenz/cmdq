@@ -2,6 +2,7 @@ package de.isc.cmdq.domain;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 
 /**
  * Command request descriptor.
@@ -9,5 +10,5 @@ import lombok.Data;
 @Data
 @Builder
 public class CmdRequest {
-  private String cmdName;
+  @NonNull private String cmdName;
 }

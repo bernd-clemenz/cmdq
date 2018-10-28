@@ -2,7 +2,6 @@ package de.isc.cmdq.controller;
 
 import de.isc.cmdq.conf.ServiceConfig;
 import de.isc.cmdq.conf.WebConfig;
-import de.isc.cmdq.service.CmdImplTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
@@ -28,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = {ServiceConfig.class, WebConfig.class})
 @WebAppConfiguration
 @DirtiesContext
-public class CommandControllerTest {
+class CommandControllerTest {
 
   private static Logger LOG;
 
@@ -36,29 +37,47 @@ public class CommandControllerTest {
    * Select a specific logging configuration for testing.
    */
   @BeforeAll
-  public static void beforeClass() {
+  static void beforeClass() {
     System.setProperty("log4j.configurationFile","log4j2-test.xml");
-    LOG = LogManager.getLogger(CmdImplTest.class);
+    LOG = LogManager.getLogger(CommandControllerTest.class);
   }
 
-  @Autowired
-  WebApplicationContext wac;
+  @Autowired private WebApplicationContext wac;
   private MockMvc mockMvc;
 
-  public CommandControllerTest() {}
+  CommandControllerTest() {}
 
   @BeforeEach
-  public void before() {
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+  void before() {
+    mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
   }
 
 
   @Test
   @DisplayName("Add command via controller")
-  public void test002Status()
+  void test001Add()
   throws Exception {
     LOG.info("add command via controller");
     mockMvc.perform(put("/cmd/12345678"))
            .andExpect(status().isCreated());
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = {"a", "b","c","d","e","f"})
+  @DisplayName("Add multiple command via controller in sequence")
+  void test002MultiAdd(final String value)
+  throws Exception {
+    LOG.info("multiple add command via controller in sequence");
+    mockMvc.perform(put("/cmd/" + value))
+           .andExpect(status().isCreated());
+  }
+
+  @Test
+  @DisplayName("Add command via controller")
+  void test003Add()
+  throws Exception {
+    LOG.info("add command via controller");
+    mockMvc.perform(put("/cmd/12345678"))
+            .andExpect(status().isCreated());
   }
 }

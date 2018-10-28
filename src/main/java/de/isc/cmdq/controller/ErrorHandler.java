@@ -1,7 +1,7 @@
 package de.isc.cmdq.controller;
 
 import de.isc.cmdq.domain.ErrorDescriptor;
-import de.isc.cmdq.error.InternalError;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
@@ -10,8 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,20 +42,24 @@ public class ErrorHandler {
   public ResponseEntity<ErrorDescriptor> errorHandler(final Exception x,
                                                       final HttpServletRequest req) {
     HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+    String message = x.getMessage();
     if(x.getClass().isAnnotationPresent(ResponseStatus.class)) {
       ResponseStatus st = x.getClass().getAnnotation(ResponseStatus.class);
-      if(st.code() != null) {
-        status = st.code();
-      } else if(st.value() != null) {
-        status = st.value();
+      status = st.value();
+      if(StringUtils.isNotBlank(st.reason())) {
+        message = st.reason();
       }
+    }
+
+    if(StringUtils.isBlank(message)) {
+      message = "No information available.";
     }
 
     HttpHeaders header = new HttpHeaders();
     header.setContentType(MediaType.APPLICATION_JSON);
 
     ErrorDescriptor err = ErrorDescriptor.builder()
-                                         .message(x.getMessage())
+                                         .message(message)
                                          .url(req.getRequestURI())
                                          .status(status.value())
                                          .build();

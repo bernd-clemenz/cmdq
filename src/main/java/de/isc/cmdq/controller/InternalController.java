@@ -75,11 +75,8 @@ public class InternalController {
   @ResponseBody
   public Map<?,?> statusData() {
     LOG.debug("status requested");
-    // Double-Bracket initialization
-    return Collections.unmodifiableMap(new HashMap<String, Object>() {{
-      put("memory",m_service.memory());
-      put("start.time",m_service.startTime());
-      put("add.queue.calls",m_service.countAddQueueCall());
-    }});
+    return Map.of("memory",m_service.memory(),
+                  "start.time",m_service.startTime(),
+                  "add.queue.calls",m_service.countAddQueueCall());
   }
 }

@@ -1,14 +1,15 @@
 package de.isc.cmdq.domain;
 
-import lombok.Data;
-import org.apache.commons.lang3.Validate;
+import lombok.*;
 
+import java.time.Instant;
 import java.util.UUID;
 
 /**
  * Item that is placed in the command queue.
  */
 @Data
+@Builder
 public class CmdQueueItem  {
   /**
    * Factory method.
@@ -18,20 +19,12 @@ public class CmdQueueItem  {
    * @throws IllegalArgumentException if request name is blank
    */
   public static CmdQueueItem from(final CmdRequest request) {
-    Validate.notNull(request, "null requests are not allowed");
-    Validate.notBlank(request.getCmdName(),"Empty command names are not allowed");
-    CmdQueueItem item = new CmdQueueItem();
-    item.setCmdRequest(request);
-    item.setId(UUID.randomUUID());
-
-    return item;
+    return CmdQueueItem.builder()
+                       .cmdRequest(request)
+                       .build();
   }
 
-  private CmdRequest cmdRequest;
-  private UUID id;
-
-  /**
-   * Constructor.
-   */
-  public CmdQueueItem() { /* empty */ }
+  @NonNull private CmdRequest cmdRequest;
+  @Builder.Default @Setter(AccessLevel.NONE) private Instant created = Instant.now();
+  @NonNull @Builder.Default private UUID id = UUID.randomUUID();
 }

@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import de.isc.cmdq.conf.ServiceConfig;
 import de.isc.cmdq.conf.WebConfig;
-import de.isc.cmdq.service.CmdImplTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
@@ -28,7 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 @ContextConfiguration(classes = {ServiceConfig.class, WebConfig.class})
 @WebAppConfiguration
 @DirtiesContext
-public class InternalControllerTest {
+class InternalControllerTest {
 
   private static Logger LOG;
 
@@ -36,25 +35,24 @@ public class InternalControllerTest {
    * Select a specific logging configuration for testing.
    */
   @BeforeAll
-  public static void beforeClass() {
+  static void beforeClass() {
     System.setProperty("log4j.configurationFile","log4j2-test.xml");
-    LOG = LogManager.getLogger(CmdImplTest.class);
+    LOG = LogManager.getLogger(InternalControllerTest.class);
   }
 
-  @Autowired
-  WebApplicationContext wac;
+  @Autowired private WebApplicationContext wac;
   private MockMvc mockMvc;
 
-  public InternalControllerTest() {}
+  InternalControllerTest() {}
 
   @BeforeEach
-  public void before() {
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+  void before() {
+    mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
   }
 
   @Test
   @DisplayName("Check version controller")
-  public void test001Version()
+  void test001Version()
   throws Exception {
     LOG.info("version");
     mockMvc.perform(get("/internal/version"))
@@ -64,7 +62,7 @@ public class InternalControllerTest {
 
   @Test
   @DisplayName("Check status endpoint")
-  public void test002Status()
+  void test002Status()
   throws Exception {
     LOG.info("status");
     mockMvc.perform(get("/internal/status"))
