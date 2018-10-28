@@ -10,7 +10,9 @@ import javax.servlet.ServletException;
 
 /**
  * Initialize the web-application.
+ * (c) ISC Clemenz &amp; Weinbrecht GmbH
  */
+@SuppressWarnings("unused")
 public class WebInit extends AbstractAnnotationConfigDispatcherServletInitializer {
   private static final Logger LOG = LogManager.getLogger(WebInit.class);
 

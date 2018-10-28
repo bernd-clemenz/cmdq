@@ -13,11 +13,13 @@ import java.time.Instant;
 /**
  * Service collecting and providing application internal
  * state data.
+ *
  * (c) ISC Clemenz &amp; Weinbrecht GmbH
  *
  */
 @Component
 @Scope(BeanDefinition.SCOPE_SINGLETON)
+@SuppressWarnings("unused")
 public class InternalDataService {
   private static final Logger LOG = LogManager.getLogger(InternalDataService.class);
 
@@ -54,4 +56,6 @@ public class InternalDataService {
    * @return number of calls to add queue
    */
   public long countAddQueueCall() { return m_statColl.countQueueAdd(); }
+
+  public long countScriptCalls() { return m_statColl.countScriptCalls(); }
 }

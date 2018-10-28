@@ -6,6 +6,7 @@ import lombok.NonNull;
 
 /**
  * Command request descriptor.
+ * (c) ISC Clemenz &amp; Weinbrecht GmbH
  */
 @Data
 @Builder

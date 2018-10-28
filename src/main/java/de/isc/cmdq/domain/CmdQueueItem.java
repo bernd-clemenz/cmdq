@@ -7,6 +7,7 @@ import java.util.UUID;
 
 /**
  * Item that is placed in the command queue.
+ * (c) ISC Clemenz &amp; Weinbrecht GmbH
  */
 @Data
 @Builder

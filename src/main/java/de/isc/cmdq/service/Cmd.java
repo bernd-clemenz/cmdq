@@ -4,6 +4,7 @@ import de.isc.cmdq.domain.CmdRequest;
 
 /**
  * Operations of the command queue.
+ * (c) ISC Clemenz &amp; Weinbrecht GmbH
  */
 public interface Cmd {
   /**
@@ -15,7 +16,6 @@ public interface Cmd {
   String add(CmdRequest req);
 
   /**
-   *
    * @return number of items currently in queue
    */
   int size();

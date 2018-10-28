@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -77,6 +75,7 @@ public class InternalController {
     LOG.debug("status requested");
     return Map.of("memory",m_service.memory(),
                   "start.time",m_service.startTime(),
+                  "script.calls",m_service.countScriptCalls(),
                   "add.queue.calls",m_service.countAddQueueCall());
   }
 }

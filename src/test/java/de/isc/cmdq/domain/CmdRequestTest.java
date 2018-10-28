@@ -1,9 +1,11 @@
 package de.isc.cmdq.domain;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
+@Tag("unitTest")
 class CmdRequestTest {
   CmdRequestTest() {}
 

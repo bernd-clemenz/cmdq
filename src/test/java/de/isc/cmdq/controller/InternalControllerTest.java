@@ -8,10 +8,7 @@ import de.isc.cmdq.conf.ServiceConfig;
 import de.isc.cmdq.conf.WebConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,6 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @ExtendWith(SpringExtension.class)
+@Tag("unitTest")
 @ContextConfiguration(classes = {ServiceConfig.class, WebConfig.class})
 @WebAppConfiguration
 @DirtiesContext

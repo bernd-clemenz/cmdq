@@ -48,11 +48,19 @@ in module'**.
 * In Maven 3.0.4 everything works as expected
 * In Maven 3.5.2 everything works as expected
 
+## Compiler warnings
+* all @SuppressWarnings("unused") are set as the IDE does not resolve IoC usage.
+
 
 ## Modules
 * [Spring-Framework](https://www.spring.io)
 * [Lombock](https://projectlombock.org)
 * [log4j2](https://logging.apache.org/log4j/2.x/)
+* [Jython](http://www.jython.org)
+
+## License
+The License for the source code is Apache 2.0. But pay attention to the different licenses
+of the dependencies.
 
 ## Other Sources
 * [Log4j2 tutorial](https://howtodoinjava.com/log4j2/log4j2-properties-example/)

@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * Command execution via controller.
+ *
+ * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ */
 @RestController
 @RequestMapping("/cmd")
 @SuppressWarnings("unused")
