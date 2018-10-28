@@ -27,5 +27,5 @@ public class CmdQueueItem  {
 
   @NonNull private CmdRequest cmdRequest;
   @Builder.Default @Setter(AccessLevel.NONE) private Instant created = Instant.now();
-  @NonNull @Builder.Default private UUID id = UUID.randomUUID();
+  @Builder.Default @Setter(AccessLevel.NONE) private UUID id = UUID.randomUUID();
 }

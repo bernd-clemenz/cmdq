@@ -9,7 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -19,7 +18,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -50,7 +48,6 @@ class CommandControllerTest {
     mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
   }
 
-
   @Test
   @DisplayName("Add command via controller")
   void test001Add()
@@ -61,7 +58,7 @@ class CommandControllerTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"a", "b","c","d","e","f"})
+  @ValueSource(strings = {"a","b","c","d","e","f"})
   @DisplayName("Add multiple command via controller in sequence")
   void test002MultiAdd(final String value)
   throws Exception {

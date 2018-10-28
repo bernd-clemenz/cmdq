@@ -11,7 +11,9 @@ class CmdQueueItemTest {
   @Test
   void testStaticConstructor() {
     final String name = "thisIsaName";
-    CmdRequest request = CmdRequest.builder().cmdName(name).build();
+    CmdRequest request = CmdRequest.builder()
+                                   .cmdName(name)
+                                   .build();
     CmdQueueItem item = CmdQueueItem.from(request);
 
     Assertions.assertNotNull(item);
