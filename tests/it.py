@@ -12,7 +12,6 @@ config_name = 'it.ini'
 
 def setup_module(module):
     global CFG
-    # 1. Configuration
     CFG = configparser.ConfigParser()
 
     if not os.path.isfile(config_name):
@@ -23,6 +22,9 @@ def setup_module(module):
 
 def test_version():
     global CFG
-    url = '{0}://{1}:{2}/cmdq/v1/internal/version'.format(CFG['cmdq']['scheme'],
-                                                           CFG['cmdq']['host'],
-                                                           CFG['cmdq']['port'])
+    url = '{0}://{1}:{2}{3}/internal/version'.format(CFG['cmdq']['scheme'],
+                                                     CFG['cmdq']['host'],
+                                                     CFG['cmdq']['port'],
+                                                     CFG['cmdq']['path'])
+    rsp = requests.get(url, timeout=int(CFG['tests']['timeout']))
+    assert rsp.status_code == requests.codes.ok
