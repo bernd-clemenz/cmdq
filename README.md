@@ -47,6 +47,7 @@ in module'**.
 * Same goes for executing a test in the IDE
 * In Maven 3.0.4 everything works as expected
 * In Maven 3.5.2 everything works as expected
+* In Maven 3.6.0 everything works as expected
 
 ## Compiler warnings
 * all @SuppressWarnings("unused") are set as the IDE does not resolve IoC usage.
