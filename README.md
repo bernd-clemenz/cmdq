@@ -41,6 +41,8 @@ this example, Lombok works perfectly fine and is a great time-saver.
 Still trouble with Aspectj 1.9.1. Waiting for 1.9.2 to be fully compatible with 
 Java 11. But could make Aspects work with Springs instrumentation library.
 
+Now with AspectJ 1.9.2 Aspects work just fine.
+
 ### Junit 5
 * My IntelliJ (2018.2.5) has trouble debugging Junit5 tests. It claims **'Junit not found
 in module'**.
