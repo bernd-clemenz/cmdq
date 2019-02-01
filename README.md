@@ -55,7 +55,7 @@ in module'**.
 
 ## Modules
 * [Spring-Framework](https://www.spring.io)
-* [Lombock](https://projectlombock.org)
+* [Lombok](https://projectlombok.org)
 * [log4j2](https://logging.apache.org/log4j/2.x/)
 * [Jython](http://www.jython.org)
 
