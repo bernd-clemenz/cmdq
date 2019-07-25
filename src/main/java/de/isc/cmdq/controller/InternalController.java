@@ -17,7 +17,7 @@ import java.util.Properties;
 
 /**
  * Controller to publish application state date.
- * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ * &copy; ISC Clemenz &amp; Weinbrecht GmbH
  */
 @RestController
 @RequestMapping("/internal")

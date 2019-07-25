@@ -24,7 +24,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * Command service.
  *
- * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ * &copy; ISC Clemenz &amp; Weinbrecht GmbH
  */
 @Component
 @Scope(BeanDefinition.SCOPE_SINGLETON)

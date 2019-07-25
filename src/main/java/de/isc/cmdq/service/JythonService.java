@@ -22,7 +22,7 @@ import java.util.Optional;
 /**
  * Jython script execution service.
  *
- * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ * &copy; ISC Clemenz &amp; Weinbrecht GmbH
  */
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)

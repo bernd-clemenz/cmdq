@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Operations of the command queue.
- * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ * &copy; ISC Clemenz &amp; Weinbrecht GmbH
  */
 public interface Cmd {
   /**

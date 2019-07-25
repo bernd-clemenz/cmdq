@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * Script execution error.
- * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ * &copy; ISC Clemenz &amp; Weinbrecht GmbH
  */
 @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
 public class ScriptError extends RuntimeException {

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Transforms error output in generic error-message output.
  *
- * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ * &copy; ISC Clemenz &amp; Weinbrecht GmbH
  */
 @ControllerAdvice
 @SuppressWarnings("unused")

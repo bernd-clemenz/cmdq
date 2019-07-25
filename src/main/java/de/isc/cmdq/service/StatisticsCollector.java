@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Collecting some statistics as an Aspect.
  *
- * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ * &copy; ISC Clemenz &amp; Weinbrecht GmbH
  */
 @Aspect
 @Component

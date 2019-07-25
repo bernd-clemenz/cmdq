@@ -4,7 +4,7 @@ import org.springframework.context.annotation.*;
 
 /**
  * Configuration for the core.
- * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ * &copy; ISC Clemenz &amp; Weinbrecht GmbH
  */
 @Configuration
 @EnableLoadTimeWeaving

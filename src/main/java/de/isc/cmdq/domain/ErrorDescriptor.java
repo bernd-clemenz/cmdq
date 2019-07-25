@@ -8,7 +8,7 @@ import java.time.Instant;
 
 /**
  * Basic data to describe an error.
- * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ * &copy; ISC Clemenz &amp; Weinbrecht GmbH
  */
 @Data
 @Builder

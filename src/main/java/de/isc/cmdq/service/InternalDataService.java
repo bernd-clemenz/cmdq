@@ -14,7 +14,7 @@ import java.time.Instant;
  * Service collecting and providing application internal
  * state data.
  *
- * (c) ISC Clemenz &amp; Weinbrecht GmbH
+ * &copy; ISC Clemenz &amp; Weinbrecht GmbH
  *
  */
 @Component
