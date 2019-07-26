@@ -9,6 +9,14 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Remove SOAPAction header if it contains a value which has a invalid
+ * value.
+ *
+ * @author Bernd Clemenz
+ * @version 1.0.0
+ * @since 0.0.1
+ */
 public class EmptySoapActionHeaderRemoverInterceptor implements HttpRequestInterceptor {
   private static final Logger LOG = LogManager.getLogger(EmptySoapActionHeaderRemoverInterceptor.class);
   public EmptySoapActionHeaderRemoverInterceptor() {
@@ -20,20 +28,18 @@ public class EmptySoapActionHeaderRemoverInterceptor implements HttpRequestInter
   throws HttpException,
          IOException {
     final String actionHeader = "SOAPAction";
+    // some values we found heuristically.
     List<String> invalidSoapActions = Arrays.asList(null,"","\"\"");
     if(httpRequest instanceof HttpEntityEnclosingRequest) {
-        Header[] allAction = httpRequest.getHeaders("SOAPAction");
-        for(Header hd : allAction) {
-          HeaderElement[] elements = hd.getElements();
-          String value = hd.getValue();
-          if(invalidSoapActions.contains(value)) {
-            httpRequest.removeHeader(hd);
-          }
-
-          LOG.info("SOAPAction: {}",value);
+      Header[] allAction = httpRequest.getHeaders(actionHeader);
+      for(Header hd : allAction) {
+        String value = hd.getValue();
+        if(invalidSoapActions.contains(value)) {
+          httpRequest.removeHeader(hd);
         }
-        //httpRequest.removeHeaders("Transfer-Encoding");
 
+        LOG.info("SOAPAction: {}",value);
+      }
     }
   }
 }
