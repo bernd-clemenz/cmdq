@@ -17,7 +17,7 @@ Therefore added the dependency:
 </dependency>
 ```
 
-The same fate hit **jaxb**. Deprecated in Java 9 and removed in Java 11
+The same fate hit **jaxb**. Deprecated in Java 9 and removed in Java 11/12
 ```xml
 <dependencies>
   <!-- lots of stuff omitted ... -->
@@ -35,7 +35,7 @@ The same fate hit **jaxb**. Deprecated in Java 9 and removed in Java 11
 ```
 
 Same goes for the SOAP-Webservice parts. In version 1.0.1 a sample Webservice
-connection is added. Based proy classes generated from a WSDL and a Maven
+connection is added. Based on proxy classes generated from a WSDL by a Maven
 plugin. The integration of SOAP-handling is left to Springs SOAP-template
 functionality. As the SOAP classes are also removed from Java-SE we add them.
 Otherwise you end with some 'ClassNotFound' exceptions.
@@ -74,7 +74,6 @@ We also need to add the Springs template component:
 </dependencies>
 ```
 
-
 ## Notes
 
 ### Lombok
@@ -105,6 +104,7 @@ in module'**. Gone in 2019 version.
 * all @SuppressWarnings("unused") are set as the IDE does not resolve IoC usage.
 
 ## integration tests
+
 They get implemented in Python and are executed with **pytest**. To prepare the
 environment for them install run:
 
