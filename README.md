@@ -104,6 +104,16 @@ in module'**. Gone in 2019 version.
 
 * all @SuppressWarnings("unused") are set as the IDE does not resolve IoC usage.
 
+## integration tests
+They get implemented in Python and are executed with **pytest**. To prepare the
+environment for them install run:
+
+>python -m pip install -r requirements.txt
+
+Run them from the **tests** subdirectory with the command:
+
+>python -m pytest -v it.py
+
 
 ## Modules
 
