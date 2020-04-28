@@ -1,9 +1,5 @@
 package de.isc.cmdq.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-
 import de.isc.cmdq.conf.ServiceConfig;
 import de.isc.cmdq.conf.WebConfig;
 import org.apache.logging.log4j.LogManager;
@@ -19,6 +15,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @Tag("unitTest")
@@ -55,7 +55,7 @@ class InternalControllerTest {
     LOG.info("version");
     mockMvc.perform(get("/internal/version"))
            .andExpect(status().isOk())
-           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+           .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 
   @Test
@@ -65,6 +65,6 @@ class InternalControllerTest {
     LOG.info("status");
     mockMvc.perform(get("/internal/status"))
            .andExpect(status().isOk())
-           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+           .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 }

@@ -80,7 +80,7 @@ class CmdImplTest {
   @Test
   void test006StuffQueue() {
     LOG.info("push a lot stuff into the command queue");
-    for(int i = 0; i < m_maxSize * 5; ++i) {
+    for(int i = 0; i < m_maxSize; ++i) {
       CmdRequest req = CmdRequest.builder()
                                  .cmdName(RandomStringUtils.randomAlphanumeric(10))
                                  .build();

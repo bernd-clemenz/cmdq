@@ -35,7 +35,6 @@ public class WebConfig implements WebMvcConfigurer {
               .parameterName("mediaType")
               .favorParameter(true)
               .ignoreAcceptHeader(true)
-              .ignoreUnknownPathExtensions(true)
               .useRegisteredExtensionsOnly(true);
   }
 
