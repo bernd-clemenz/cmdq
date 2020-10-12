@@ -1,4 +1,4 @@
-# Sample Spring-Web-Application running on Java 11
+# Sample Spring-Web-Application running on Java 15
 
 ## Abstract
 
