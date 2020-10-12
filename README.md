@@ -3,7 +3,7 @@
 ## Abstract
 
 A template or example for a Spring-Webapplication with all modules
-compatible with Java 12. The project itself has no further purpose
+compatible with Java 15. The project itself has no further purpose
 as proving the compatibility of the selected modules.
 
 ## Deprecated and removed from standard libraries: @PostConstruct and @PreDestroy
@@ -73,6 +73,8 @@ We also need to add the Springs template component:
     </dependency>
 </dependencies>
 ```
+
+Put in the most recent versions.
 
 ## Notes
 
