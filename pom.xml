@@ -20,12 +20,12 @@
   </scm>
 
   <properties>
-    <aspectj.version>1.9.5</aspectj.version>
+    <aspectj.version>1.9.6</aspectj.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jackson.version>[2.11,)</jackson.version>
     <junit.version>5.5.2</junit.version>
     <log4j.version>2.13.3</log4j.version>
-    <spring.version>5.2.7.RELEASE</spring.version>
+    <spring.version>5.2.9.RELEASE</spring.version>
   </properties>
 
   <dependencies>
@@ -70,7 +70,7 @@
     <dependency>
       <groupId>org.springframework.ws</groupId>
       <artifactId>spring-ws-core</artifactId>
-      <version>3.0.9.RELEASE</version>
+      <version>3.0.10.RELEASE</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
     <dependency>
@@ -90,7 +90,7 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.9</version>
+      <version>3.11</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
     <dependency>
@@ -268,13 +268,13 @@
         <configuration>
           <source>14</source>
           <target>14</target>
-          <release>14</release>
+          <release>15</release>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.2.0</version>
         <configuration>
           <encoding>UTF-8</encoding>
         </configuration>
@@ -283,7 +283,7 @@
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.1</version>
       </plugin>
       <plugin>
         <groupId>org.jvnet.jaxb2.maven2</groupId>
