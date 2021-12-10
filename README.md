@@ -100,6 +100,7 @@ in module'**. Gone in 2019 version.
 * In Maven 3.5.2 everything works as expected
 * In Maven 3.6.0 everything works as expected
 * In Maven 3.6.1 everything works as expected
+* In Maven 3.8.4 everything works as expected
 
 ## Compiler warnings
 
