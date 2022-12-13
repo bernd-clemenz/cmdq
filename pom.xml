@@ -6,11 +6,11 @@
 
   <groupId>de.isc</groupId>
   <artifactId>cmdq</artifactId>
-  <version>1.0.5</version>
+  <version>1.0.6</version>
   <packaging>war</packaging>
 
   <description>
-    A sample Spring-MVC application under Java 14.
+    A sample Spring-MVC application under Java 17.
     Just to see the compatibility of the modules.
   </description>
 
@@ -24,7 +24,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jackson.version>2.14.1</jackson.version>
     <junit.version>5.9.1</junit.version>
-    <log4j.version>2.17.1</log4j.version>
+    <log4j.version>2.19.0</log4j.version>
     <spring.version>5.3.24</spring.version>
   </properties>
 
@@ -52,7 +52,6 @@
       <artifactId>saaj-impl</artifactId>
       <version>1.5.1</version>
     </dependency>
-
 
     <dependency>
       <groupId>javax.annotation</groupId>
@@ -142,6 +141,14 @@
       <artifactId>jackson-databind</artifactId>
       <version>${jackson.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+
 
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
     <dependency>
@@ -246,7 +253,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <version>3.0.0-M7</version>
         <configuration>
           <properties>
             <includeTags>junit5</includeTags>
@@ -264,7 +271,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.10.1</version>
         <configuration>
           <release>17</release>
         </configuration>
@@ -272,7 +279,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>3.3.0</version>
         <configuration>
           <encoding>UTF-8</encoding>
         </configuration>
