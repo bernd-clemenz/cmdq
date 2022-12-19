@@ -2,13 +2,12 @@ package de.isc.cmdq.controller;
 
 import de.isc.cmdq.domain.CmdRequest;
 import de.isc.cmdq.service.Cmd;
+import jakarta.annotation.PostConstruct;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.PostConstruct;
 
 /**
  * Command execution via controller.

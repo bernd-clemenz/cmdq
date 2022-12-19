@@ -4,6 +4,8 @@ import de.isc.cmdq.domain.CmdQueueItem;
 import de.isc.cmdq.domain.CmdRequest;
 import de.isc.cmdq.error.ConfigError;
 import de.isc.cmdq.error.ScriptError;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -97,7 +98,7 @@ public class CmdImpl implements Cmd {
       throw new ConfigError("cmdq.queue.size or cmdq.wait.before.kill");
     }
   }
-  //---------------------------------------------------------------------------
+
   /**
    * Shutting service down.
    */

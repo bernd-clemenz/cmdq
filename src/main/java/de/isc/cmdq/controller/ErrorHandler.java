@@ -1,6 +1,7 @@
 package de.isc.cmdq.controller;
 
 import de.isc.cmdq.domain.ErrorDescriptor;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,12 +14,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * Transforms error output in generic error-message output.
- *
+ * <p>
  * &copy; ISC Clemenz &amp; Weinbrecht GmbH
+ * </p>
  */
 @ControllerAdvice
 @SuppressWarnings("unused")

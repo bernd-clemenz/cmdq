@@ -3,6 +3,7 @@ package de.isc.cmdq.service;
 import de.isc.cmdq.domain.CmdQueueItem;
 import de.isc.cmdq.error.InternalResourceNotFound;
 import de.isc.cmdq.error.ScriptError;
+import jakarta.annotation.PostConstruct;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -13,9 +14,9 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Optional;
 
@@ -66,7 +67,7 @@ public class JythonService {
     }
 
     try(InputStream ins = JythonService.class.getResourceAsStream("/scripts/jython/" + m_scriptName)) {
-      m_script = IOUtils.toString(ins,"utf8");
+      m_script = IOUtils.toString(ins, StandardCharsets.UTF_8);
       if(StringUtils.isEmpty(m_script)) {
         LOG.error("Empty script");
         throw new IllegalStateException("Empty script: " + m_scriptName);

@@ -8,7 +8,9 @@ import java.time.Instant;
 
 /**
  * Basic data to describe an error.
+ * <p>
  * &copy; ISC Clemenz &amp; Weinbrecht GmbH
+ * </p>
  */
 @Data
 @Builder
