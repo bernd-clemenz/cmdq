@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -35,6 +36,7 @@ class CmdImplTest {
   }
 
   @Autowired private Cmd m_cmd;
+  @Autowired private ApplicationContext m_app;
   @Value("${cmdq.queue.size}") private int m_maxSize;
 
   CmdImplTest() {}
@@ -87,5 +89,15 @@ class CmdImplTest {
       m_cmd.add(req);
     }
     LOG.info("stuffing done");
+  }
+
+  @Test
+  void test007Dilbert() {
+    LOG.info("dilbert service");
+    Assertions.assertNotNull(m_app);
+    DailyDilbertServiceConnector dilbert = m_app.getBean(DailyDilbertServiceConnector.class);
+    String value = dilbert.todaysDilbert();
+    Assertions.assertNotNull(value);
+    LOG.info("Dilbert: {}",value);
   }
 }

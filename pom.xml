@@ -16,10 +16,10 @@
     <url>https://bitbucket.org/isccode/kiwi-axxum-sap/src/master/</url>
     <connection>scm:git:https://github.com/bernd-clemenz/cmdq.git</connection>
   </scm>
-
   <properties>
     <aspectj.version>1.9.9.1</aspectj.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <jackson.version>2.14.1</jackson.version>
     <junit.version>5.9.1</junit.version>
     <log4j.version>2.19.0</log4j.version>
@@ -98,14 +98,6 @@
       <version>2.1.1</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-    <!--
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
-      <scope>provided</scope>
-    </dependency>
-    -->
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
@@ -195,8 +187,6 @@
       <artifactId>jackson-datatype-jsr310</artifactId>
       <version>${jackson.version}</version>
     </dependency>
-
-
 
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
     <dependency>
@@ -307,7 +297,8 @@
             <includeTags>junit5</includeTags>
           </properties>
           <argLine>
-            --illegal-access=permit
+            --add-opens java.base/java.lang=ALL-UNNAMED
+            --add-opens java.base/java.util=ALL-UNNAMED
             -javaagent:${settings.localRepository}/org/springframework/spring-instrument/${spring.version}/spring-instrument-${spring.version}.jar
           </argLine>
           <!--
@@ -338,7 +329,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>3.3.2</version>
       </plugin>
-      <!--
+
       <plugin>
         <groupId>org.jvnet.jaxb2.maven2</groupId>
         <artifactId>maven-jaxb2-plugin</artifactId>
@@ -361,8 +352,40 @@
             </schema>
           </schemas>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>4.0.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-xjc</artifactId>
+            <version>4.0.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>4.0.1</version>
+          </dependency>
+          <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+          </dependency>
+          <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>4.0.1</version>
+            <scope>runtime</scope>
+          </dependency>
+          <dependency>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+            <version>2.1.0</version>
+          </dependency>
+        </dependencies>
       </plugin>
-      -->
     </plugins>
     <resources>
       <resource>
