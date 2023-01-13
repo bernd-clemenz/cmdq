@@ -6,7 +6,7 @@
 
   <groupId>de.isc</groupId>
   <artifactId>cmdq</artifactId>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
   <packaging>war</packaging>
   <description>
     A sample Spring-MVC application under Java 17.
@@ -17,13 +17,13 @@
     <connection>scm:git:https://github.com/bernd-clemenz/cmdq.git</connection>
   </scm>
   <properties>
-    <aspectj.version>1.9.9.1</aspectj.version>
+    <aspectj.version>1.9.19</aspectj.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <jackson.version>2.14.1</jackson.version>
     <junit.version>5.9.1</junit.version>
     <log4j.version>2.19.0</log4j.version>
-    <spring.version>6.0.2</spring.version>
+    <spring.version>6.0.3</spring.version>
   </properties>
 
   <dependencies>
